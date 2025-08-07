@@ -264,28 +264,28 @@
                 </div>
                 
                 <form 
-                    action="https://formsubmit.co/your-real-email@example.com" 
+                    action="https://formspree.io/f/mgvzpabb" 
                     method="POST"
                     class="contact-form"
 >
-                    <!-- Honeypot for spam prevention -->
-                    <input type="text" name="_honey" style="display:none">
+                    <!-- Use your Netlify URL here -->
+                    <input type="hidden" name="_next" value="https://jovial-sunflower-c3eb7a.netlify.app//thank-you.html">
   
-                     <!-- Disable captcha (optional) -->
-                    <input type="hidden" name="_captcha" value="false">
+                    <!-- Spam protection -->
+                    <input type="text" name="_gotcha" style="display:none">
   
-                    <!-- Success redirect -->
-                    <input type="hidden" name="_next" value="https://yourusername.github.io/portfolio/thank-you.html">
+                    <!-- Custom email subject -->
+                    <input type="hidden" name="_subject" value="New Portfolio Message">
   
-                     <!-- Your form fields (keep existing) -->
+                    <!-- Your form fields -->
                     <div class="form-group">
-                    <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="text" name="name" placeholder="Your Name" required>
                     </div>
                     <div class="form-group">
-                    <input type="email" name="email" placeholder="Your Email" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
                     </div>
                     <div class="form-group">
-                        <textarea name="message" placeholder="Your Message" required></textarea>
+                        <textarea name="message" placeholder="Your Message" required rows="5"></textarea>
                     </div>
   
                     <button type="submit" class="btn btn-primary">
