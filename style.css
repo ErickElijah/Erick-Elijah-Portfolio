@@ -9,6 +9,14 @@
     --success: #16a34a;
 }
 
+/* Prevent horizontal scrolling */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -25,6 +33,20 @@ body {
 h1, h2, h3, h4 {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
+}
+
+/* Container constraints */
+.container, 
+.nav-container, 
+.hero-content, 
+.about-content, 
+.contact-container,
+.testimonials-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 /* Navigation */
@@ -44,9 +66,6 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .logo {
@@ -82,9 +101,6 @@ nav {
 }
 
 .hero-content {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
@@ -158,12 +174,6 @@ nav {
 /* Sections */
 .section {
     padding: 6rem 0;
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .section-title {
@@ -301,7 +311,6 @@ nav {
 /* Testimonials */
 .testimonials-container {
     max-width: 900px;
-    margin: 0 auto;
 }
 
 .testimonial-slider {
@@ -712,13 +721,12 @@ footer p {
         justify-content: center;
     }
 
-    .hero-image {
-        margin-top: 3rem;
-        padding-top: 5rem;
-    }
-
     .hero {
         padding-top: 6rem;
+    }
+
+    .hero-image {
+        margin-top: 3rem;
     }
 
     .hero-text h1 {
@@ -768,15 +776,42 @@ footer p {
         bottom: 20px;
         right: 20px;
     }
+
+    /* Prevent any element from causing overflow */
+    * {
+        max-width: 100%;
+    }
+    
+    /* Specifically handle text elements */
+    h1, h2, h3, p, li, blockquote {
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    /* Ensure buttons stay within view */
+    .btn {
+        white-space: normal;
+    }
+    
+    /* Timeline adjustments */
+    .timeline {
+        padding-left: 15px;
+    }
+    
+    /* Testimonial slider adjustments */
+    .testimonial-slider {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+    }
 }
 
 @media (max-width: 480px) {
     .hero-text h1 {
         font-size: 1.8rem;
-    }
-
-    .hero-image {
-        margin-top: 2rem;
     }
 
     .hero-text p {
