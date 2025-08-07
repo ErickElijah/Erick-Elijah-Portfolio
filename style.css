@@ -169,6 +169,7 @@ nav {
     object-fit: cover;
     border: 5px solid white;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
 /* Sections */
@@ -828,7 +829,8 @@ footer p {
     }
 
     .profile-pic {
-        max-width: 220px;
+        max-width: 250px;
+        border-width: 4px;
     }
 
     .section-title h2 {
