@@ -8,23 +8,29 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Smooth scrolling
+// Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
     });
 });
 
-// Testimonial slider
+// Testimonial slider functionality
 let currentSlide = 0;
 const slides = document.querySelectorAll('.testimonial');
 const totalSlides = slides.length;
 
 function showSlide(index) {
-    document.querySelector('.testimonial-slider').style.transform = `translateX(-${index * 100}%)`;
+    const slider = document.querySelector('.testimonial-slider');
+    if (slider) {
+        slider.style.transform = `translateX(-${index * 100}%)`;
+    }
 }
 
 function nextSlide() {
@@ -37,76 +43,26 @@ function prevSlide() {
     showSlide(currentSlide);
 }
 
-// Auto-rotate testimonials (10 seconds)
-setInterval(nextSlide, 10000);
-
-// Manual navigation
-document.querySelector('.testimonial-next').addEventListener('click', nextSlide);
-document.querySelector('.testimonial-prev').addEventListener('click', prevSlide);
-
-// Form submission handler
-document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.querySelector('.contact-form');
-    const successMessage = document.getElementById('form-success');
+// Initialize testimonial slider if it exists
+if (document.querySelector('.testimonial-slider')) {
+    // Auto-rotate testimonials (10 seconds)
+    setInterval(nextSlide, 10000);
     
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Client-side validation
-            const inputs = contactForm.querySelectorAll('input, textarea');
-            let isValid = true;
-            
-            inputs.forEach(input => {
-                if (!input.value.trim()) {
-                    input.style.borderColor = '#ef4444';
-                    isValid = false;
-                } else {
-                    input.style.borderColor = '#e0e0e0';
-                }
-            });
-            
-            if (!isValid) return;
-            
-            // Submit form via Netlify
-            const formData = new FormData(contactForm);
-            
-            fetch('/', {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/x-www-form-urlencoded' 
-                },
-                body: new URLSearchParams(formData).toString()
-            })
-            .then(() => {
-                // Show success message
-                contactForm.style.display = 'none';
-                successMessage.style.display = 'block';
-                
-                // Scroll to success message
-                successMessage.scrollIntoView({ behavior: 'smooth' });
-            })
-            .catch(error => {
-                alert('Error sending message. Please try again later.');
-                console.error('Form submission error:', error);
-            });
-        });
-    }
+    // Manual navigation
+    const nextBtn = document.querySelector('.testimonial-next');
+    const prevBtn = document.querySelector('.testimonial-prev');
     
-    // Show success message if coming from redirect
-    if (window.location.search.includes('form-submitted=true')) {
-        if (contactForm) contactForm.style.display = 'none';
-        if (successMessage) successMessage.style.display = 'block';
-    }
-});
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+}
 
-// Animate elements when they come into view
+// Scroll animation for elements
 const animateOnScroll = function() {
     const elements = document.querySelectorAll('.timeline-item, .testimonial-content, .skill-item');
+    const windowHeight = window.innerHeight;
     
     elements.forEach(element => {
         const elementPosition = element.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
         
         if (elementPosition < windowHeight - 100) {
             element.style.opacity = '1';
@@ -115,12 +71,18 @@ const animateOnScroll = function() {
     });
 };
 
-// Initialize elements with hidden state
-document.querySelectorAll('.timeline-item, .testimonial-content, .skill-item').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'all 0.5s ease';
+// Initialize animation styles
+document.addEventListener('DOMContentLoaded', function() {
+    // Set initial state for animated elements
+    document.querySelectorAll('.timeline-item, .testimonial-content, .skill-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'all 0.5s ease';
+    });
+    
+    // Trigger first animation check
+    animateOnScroll();
 });
 
+// Set up scroll event listener
 window.addEventListener('scroll', animateOnScroll);
-window.addEventListener('load', animateOnScroll);
