@@ -264,31 +264,32 @@
                 </div>
                 
                 <form 
-                    name="contact" 
-                    method="POST" 
-                    data-netlify="true" 
-                    netlify-honeypot="bot-field"
-                    class="contact-form">
-                    <!-- Honeypot Field (for spam filtering) -->
-                    <p class="hidden">
-                     <label>Don’t fill this out if you’re human: <input name="bot-field"></label>
-                    </p>
+                    action="https://formsubmit.co/your-real-email@example.com" 
+                    method="POST"
+                    class="contact-form"
+>
+                    <!-- Honeypot for spam prevention -->
+                    <input type="text" name="_honey" style="display:none">
   
-                    <!-- Hidden Netlify Form Name -->
-                    <input type="hidden" name="form-name" value="contact">
+                     <!-- Disable captcha (optional) -->
+                    <input type="hidden" name="_captcha" value="false">
   
-                     <!-- Your Form Fields -->
+                    <!-- Success redirect -->
+                    <input type="hidden" name="_next" value="https://yourusername.github.io/portfolio/thank-you.html">
+  
+                     <!-- Your form fields (keep existing) -->
                     <div class="form-group">
-                        <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="text" name="name" placeholder="Your Name" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" name="email" placeholder="Your Email" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
                     </div>
                     <div class="form-group">
-                         <textarea name="message" placeholder="Your Message" required></textarea>
+                        <textarea name="message" placeholder="Your Message" required></textarea>
                     </div>
+  
                     <button type="submit" class="btn btn-primary">
-                     <i class="fas fa-paper-plane"></i> Send Message
+                        <i class="fas fa-paper-plane"></i> Send Message
                     </button>
                 </form>
                 
